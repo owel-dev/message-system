@@ -1,4 +1,3 @@
 package dev.owel.messagesystem.dto;
 
-public record Message(String content) {
-}
+public record Message(String username, String content) {}
