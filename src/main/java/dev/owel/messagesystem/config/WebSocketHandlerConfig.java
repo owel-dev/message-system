@@ -1,6 +1,6 @@
-package dev.owel.message_system.config;
+package dev.owel.messagesystem.config;
 
-import dev.owel.message_system.handler.MessageHandler;
+import dev.owel.messagesystem.handler.MessageHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;

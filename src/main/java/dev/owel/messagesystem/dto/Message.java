@@ -1,4 +1,4 @@
-package dev.owel.message_system.dto;
+package dev.owel.messagesystem.dto;
 
 public record Message(String content) {
 }

@@ -1,6 +1,6 @@
-package dev.owel.message_system.handler;
+package dev.owel.messagesystem.handler;
 
-import dev.owel.message_system.dto.Message;
+import dev.owel.messagesystem.dto.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
-package dev.owel.message_system.handler
+package dev.owel.messagesystem.handler
 
-import dev.owel.message_system.MessageSystemApplication
-import dev.owel.message_system.dto.Message
+import dev.owel.messagesystem.MessageSystemApplication
+import dev.owel.messagesystem.dto.Message
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.web.socket.TextMessage
