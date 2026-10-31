@@ -1,6 +1,7 @@
 package dev.owel.messagesystem.handler;
 
 import dev.owel.messagesystem.dto.Message;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -40,7 +41,7 @@ public class MessageHandler extends TextWebSocketHandler {
     }
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+    public void afterConnectionClosed(WebSocketSession session, @NonNull CloseStatus status) {
         log.info("ConnectionClosed: [{}] from {}", status, session.getId());
 
         if (leftSide == session) {
@@ -51,7 +52,7 @@ public class MessageHandler extends TextWebSocketHandler {
     }
 
     @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) {
         log.info("Received TextMessage: [{}] from {}", message, session.getId());
         String payload = message.getPayload();
         try {
