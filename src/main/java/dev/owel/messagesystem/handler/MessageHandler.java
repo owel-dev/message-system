@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.ConcurrentWebSocketSessionDecorator;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 import tools.jackson.databind.ObjectMapper;
 
@@ -26,7 +27,9 @@ public class MessageHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
         log.info("ConnectionEstablished: {}", session.getId());
-        webSocketSessionManager.storeSession(session);
+        ConcurrentWebSocketSessionDecorator concurrentWebSocketSessionDecorator =
+                new ConcurrentWebSocketSessionDecorator(session, 5000, 100 * 1024);
+        webSocketSessionManager.storeSession(concurrentWebSocketSessionDecorator);
     }
 
     @Override

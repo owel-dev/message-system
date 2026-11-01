@@ -32,11 +32,21 @@ class MessageHandlerSpec extends Specification {
 
         when:
         clientA.session.sendMessage(new TextMessage(objectMapper.writeValueAsString(new Message("clientA", "안녕하세요. A 입니다."))))
+        clientB.session.sendMessage(new TextMessage(objectMapper.writeValueAsString(new Message("clientB", "안녕하세요. B 입니다."))))
+        clientC.session.sendMessage(new TextMessage(objectMapper.writeValueAsString(new Message("clientC", "안녕하세요. C 입니다."))))
 
         then:
+        def resultA = clientA.queue.poll(1, TimeUnit.SECONDS) + clientA.queue.poll(1, TimeUnit.SECONDS)
+        def resultB = clientB.queue.poll(1, TimeUnit.SECONDS) + clientB.queue.poll(1, TimeUnit.SECONDS)
+        def resultC = clientC.queue.poll(1, TimeUnit.SECONDS) + clientC.queue.poll(1, TimeUnit.SECONDS)
+        resultA.contains("clientB") && resultA.contains("clientC")
+        resultB.contains("clientA") && resultB.contains("clientC")
+        resultC.contains("clientA") && resultC.contains("clientB")
+
+        and:
         clientA.queue.isEmpty()
-        clientB.queue.poll(1, TimeUnit.SECONDS)?.contains("clientA")
-        clientC.queue.poll(1, TimeUnit.SECONDS)?.contains("clientA")
+        clientB.queue.isEmpty()
+        clientC.queue.isEmpty()
 
         cleanup:
         clientA.session?.close()
